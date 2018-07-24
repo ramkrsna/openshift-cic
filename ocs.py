@@ -302,6 +302,7 @@ elif choice == 2:
                 print "openshift_storage_glusterfs_namespace=app-storage"
                 print "openshift_storage_glusterfs_storageclass=true"
                 print "openshift_storage_glusterfs_storageclass_default=false"
+                print "openshift_storage_glusterfs_block_deploy=false"
                 print "   "
 
                 print "# CNS storage for OpenShift infrastructure"
@@ -502,6 +503,7 @@ elif choice == 3:
                 print "openshift_storage_glusterfs_namespace=app-storage"
                 print "openshift_storage_glusterfs_storageclass=true"
                 print "openshift_storage_glusterfs_storageclass_default=false"
+                print "openshift_storage_glusterfs_block_deploy=false"
                 print "  "                
 
                 print "# CNS storage for OpenShift infrastructure"
@@ -708,6 +710,7 @@ elif choice == 4:
                 print "openshift_storage_glusterfs_namespace=app-storage"
                 print "openshift_storage_glusterfs_storageclass=true"
                 print "openshift_storage_glusterfs_storageclass_default=false"
+                print "openshift_storage_glusterfs_block_deploy=false"
                 print "  "                
 
                 print "# CNS storage for OpenShift infrastructure"
