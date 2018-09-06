@@ -36,9 +36,7 @@ openshift_storage_glusterfs_block_host_vol_size=39
 openshift_storage_glusterfs_block_storageclass=true
 openshift_storage_glusterfs_block_storageclass_default=false
 
-
 [glusterfs]
 {% for app in app_hosts -%}
 	{{app}} glusterfs_zone={{loop.cycle(1,2,3)}}  glusterfs_device='{{ raw_devices }}'
 {% endfor -%}
-

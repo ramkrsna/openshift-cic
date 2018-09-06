@@ -1,4 +1,3 @@
-  
 [OSEv3:children]
 glusterfs
 
@@ -26,10 +25,8 @@ openshift_storage_glusterfs_namespace=app-storage
 openshift_storage_glusterfs_storageclass=true
 openshift_storage_glusterfs_storageclass_default=false
 openshift_storage_glusterfs_block_deploy=false
-   
 
 [glusterfs]
 {% for app in app_hosts -%}
 	{{app}} glusterfs_zone={{loop.cycle(1,2,3)}}  glusterfs_device='{{ raw_devices }}'
 {% endfor -%}
-

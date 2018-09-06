@@ -28,7 +28,7 @@ from jinja2 import Environment, FileSystemLoader
 
 
 # regular expression to validate FQDN or IP based on RFCs
-ver = '3.10.34'
+ver = '3.9'
 
 def is_valid_hostname(hostname):
     if len(hostname) > 255:
@@ -142,8 +142,11 @@ if choice == 1:
 		# Load the enviroment
 		env = Environment(loader=file_loader)
 		
-		#load the appropriate template
-		template = env.get_template('./39/appreg.j2')
+		#load the appropriate 
+                if ver == '3.9':
+                        template = env.get_template('./39/appreg.j2')
+                elif ver == '3.10':
+                        template = env.get_template('./310/appreg.j2')
 
 		output = template.render(ver=ver,app_hosts=app_hosts,raw_devices=raw_devices, raw_storage_size=raw_storage_size,registry_pvsize=registry_pvsize)
 		#Print the output
