@@ -143,7 +143,7 @@ if choice == 1:
 		env = Environment(loader=file_loader)
 		
 		#load the appropriate template
-		template = env.get_template('./310/appreg.j2')
+		template = env.get_template('./templates/310/appreg.j2')
 
 		output = template.render(ver=ver,app_hosts=app_hosts,raw_devices=raw_devices, raw_storage_size=raw_storage_size,registry_pvsize=registry_pvsize)
 		#Print the output
@@ -179,7 +179,7 @@ if choice == 1:
 		env = Environment(loader=file_loader)
 		
 		#load the appropriate template
-		template = env.get_template('./310/appreg.j2')
+		template = env.get_template('./templates/310/appreg.j2')
 
 		output = template.render(ver=ver,app_hosts=app_hosts,raw_devices=raw_devices, raw_storage_size=raw_storage_size,registry_pvsize=registry_pvsize)
 		#Print the output
@@ -258,7 +258,7 @@ elif choice == 2:
 		env = Environment(loader=file_loader)
 		
 		#load the appropriate template
-		template = env.get_template('./310/applog-multi.j2')
+		template = env.get_template('./templates/310/applog-multi.j2')
 
 		output = template.render(ver=ver,app_hosts=app_hosts,raw_devices=raw_devices, raw_storage_size=raw_storage_size, block_host_size=block_host_size,registry_pvsize=registry_pvsize,logging_pvsize=logging_pvsize,replica_log=replica_log,log_hosts=log_hosts,log_devices=log_devices, log_storage_size=log_storage_size )
 		#Print the output
@@ -320,7 +320,7 @@ elif choice == 2:
 		env = Environment(loader=file_loader)
 		
 		#load the appropriate template
-		template = env.get_template('./310/applog.j2')
+		template = env.get_template('./templates/310/applog.j2')
 
 		output = template.render(ver=ver,app_hosts=app_hosts,raw_devices=raw_devices, raw_storage_size=raw_storage_size, block_host_size=block_host_size,registry_pvsize=registry_pvsize,logging_pvsize=logging_pvsize,replica_log=replica_log)
 		#Print the output
@@ -401,7 +401,7 @@ elif choice == 3:
 		env = Environment(loader=file_loader)
 		
 		#load the appropriate template
-		template = env.get_template('./310/appmet-multi.j2')
+		template = env.get_template('./templates/310/appmet-multi.j2')
 
 		output = template.render(ver=ver,app_hosts=app_hosts,raw_devices=raw_devices, raw_storage_size=raw_storage_size, block_host_size=block_host_size,registry_pvsize=registry_pvsize,metrics_pvsize=metrics_pvsize,met_hosts=met_hosts,met_devices=met_devices, met_storage_size=met_storage_size )
 		#Print the output
@@ -458,7 +458,7 @@ elif choice == 3:
 		env = Environment(loader=file_loader)
 		
 		#load the appropriate template
-		template = env.get_template('./310/appmet.j2')
+		template = env.get_template('./templates/310/appmet.j2')
 
 		output = template.render(ver=ver,app_hosts=app_hosts,raw_devices=raw_devices, raw_storage_size=raw_storage_size, block_host_size=block_host_size,registry_pvsize=registry_pvsize, metrics_pvsize = metrics_pvsize)
 		#Print the output
@@ -541,7 +541,7 @@ elif choice == 4:
 		env = Environment(loader=file_loader)
 		
 		#load the appropriate template
-		template = env.get_template('./310/applogmet-multi.j2')
+		template = env.get_template('./templates/310/applogmet-multi.j2')
 
 		output = template.render(ver=ver,app_hosts=app_hosts,raw_devices=raw_devices, raw_storage_size=raw_storage_size, block_host_size=block_host_size,registry_pvsize=registry_pvsize,logging_pvsize=logging_pvsize,replica_log=replica_log, met_log_hosts=met_log_hosts, met_log_devices=met_log_devices)
 		#Print the output
@@ -607,7 +607,7 @@ elif choice == 4:
 		env = Environment(loader=file_loader)
 		
 		#load the appropriate template
-		template = env.get_template('./310/applogmet.j2')
+		template = env.get_template('./templates/310/applogmet.j2')
 
 		output = template.render(ver=ver,app_hosts=app_hosts,raw_devices=raw_devices, raw_storage_size=raw_storage_size, block_host_size=block_host_size,registry_pvsize=registry_pvsize,logging_pvsize=logging_pvsize,replica_log=replica_log)
 		#Print the output
@@ -646,7 +646,7 @@ elif choice == 5:
 		env = Environment(loader=file_loader)
 		
 		#load the appropriate template
-		template = env.get_template('./310/app.j2')
+		template = env.get_template('./templates/310/app.j2')
 
 		output = template.render(ver=ver,app_hosts=app_hosts,raw_devices=raw_devices, raw_storage_size=raw_storage_size)
 		#Print the output
@@ -681,7 +681,7 @@ elif choice == 5:
 		env = Environment(loader=file_loader)
 		
 		#load the appropriate template
-		template = env.get_template('./310/app.j2')
+		template = env.get_template('./templates/310/app.j2')
 
 		output = template.render(ver=ver,app_hosts=app_hosts,raw_devices=raw_devices, raw_storage_size=raw_storage_size)
 		#Print the output
