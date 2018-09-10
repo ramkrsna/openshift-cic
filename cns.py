@@ -28,7 +28,7 @@ from jinja2 import Environment, FileSystemLoader
 
 
 # regular expression to validate FQDN or IP based on RFCs
-ver = '3.9'
+ver = raw_input('What version of OpenShift Container Platform are you deploying (3.9 or 3.10)?: ').strip()
 
 def is_valid_hostname(hostname):
     if len(hostname) > 255:
@@ -114,13 +114,12 @@ if choice == 1:
         print (60 * '-')
         avail_hosts = int(raw_input("How many nodes are available ?:  "))
 
-        if avail_hosts >= 4:
+        if avail_hosts >= 3:
                 
                 app_hosts =  raw_input("What hosts will be used for application storage (IP/FQDN) ?:  ").strip().split(" ")
                 min_hosts()
                 host_not_valid() 
                 raw_devices = raw_input("What are the raw storage devices for these hosts (/dev/<device>) ?: ").strip().split(" ")
-                raw_devices = json.dumps(raw_devices)
                 raw_storage_size = int(raw_input("What is the size of each raw storage device (GB) ?: "))
                 registry_pvsize = int(raw_input("What is the size for the registry persistent volume (GB)?: "))
 
@@ -146,9 +145,9 @@ if choice == 1:
                 if ver == '3.9':
                         template = env.get_template('./templates/39/appreg.j2')
                 elif ver == '3.10':
-                        template = env.get_template('./310/appreg.j2')
+                        template = env.get_template('./templates/310/appreg.j2')
 
-		output = template.render(ver=ver,app_hosts=app_hosts,raw_devices=raw_devices, raw_storage_size=raw_storage_size,registry_pvsize=registry_pvsize)
+		output = template.render(ver=ver,app_hosts=app_hosts,raw_devices=json.dumps(raw_devices), raw_storage_size=raw_storage_size,registry_pvsize=registry_pvsize)
 		#Print the output
 		print(output)
 
@@ -182,9 +181,13 @@ if choice == 1:
 		env = Environment(loader=file_loader)
 		
 		#load the appropriate template
-		template = env.get_template('./templates/39/appreg.j2')
-
-		output = template.render(ver=ver,app_hosts=app_hosts,raw_devices=raw_devices, raw_storage_size=raw_storage_size,registry_pvsize=registry_pvsize)
+		#template = env.get_template('./templates/39/appreg.j2')
+                if ver == '3.9':
+                        template = env.get_template('./templates/39/app.j2')
+                elif ver == '3.10':
+                        template = env.get_template('./templates/310/app.j2')
+  
+		output = template.render(ver=ver,app_hosts=app_hosts,raw_devices=json.dumps(raw_devices), raw_storage_size=raw_storage_size,registry_pvsize=registry_pvsize)
 		#Print the output
 		print(output)
 
@@ -261,9 +264,13 @@ elif choice == 2:
 		env = Environment(loader=file_loader)
 		
 		#load the appropriate template
-		template = env.get_template('./templates/39/applog-multi.j2')
-
-		output = template.render(ver=ver,app_hosts=app_hosts,raw_devices=raw_devices, raw_storage_size=raw_storage_size, block_host_size=block_host_size,registry_pvsize=registry_pvsize,logging_pvsize=logging_pvsize,replica_log=replica_log,log_hosts=log_hosts,log_devices=log_devices, log_storage_size=log_storage_size )
+		#template = env.get_template('./templates/39/applog-multi.j2')
+                if ver == '3.9':
+                        template = env.get_template('./templates/39/applog-multi.j2')
+                elif ver == '3.10':
+                        template = env.get_template('./templates/310/applog-multi.j2')
+  
+		output = template.render(ver=ver,app_hosts=app_hosts,raw_devices=json.dumps(raw_devices), raw_storage_size=raw_storage_size, block_host_size=block_host_size,registry_pvsize=registry_pvsize,logging_pvsize=logging_pvsize,replica_log=replica_log,log_hosts=log_hosts,log_devices=log_devices, log_storage_size=log_storage_size )
 		#Print the output
 		print(output)
 
@@ -323,18 +330,19 @@ elif choice == 2:
 		env = Environment(loader=file_loader)
 		
 		#load the appropriate template
-		template = env.get_template('./templates/39/applog.j2')
-
-		output = template.render(ver=ver,app_hosts=app_hosts,raw_devices=raw_devices, raw_storage_size=raw_storage_size, block_host_size=block_host_size,registry_pvsize=registry_pvsize,logging_pvsize=logging_pvsize,replica_log=replica_log)
+		#template = env.get_template('./templates/39/applog.j2')
+                if ver == '3.9':
+                        template = env.get_template('./templates/39/applog.j2')
+                elif ver == '3.10':
+                        template = env.get_template('./templates/310/applog.j2')
+  
+		output = template.render(ver=ver,app_hosts=app_hosts,raw_devices=json.dumps(raw_devices), raw_storage_size=raw_storage_size, block_host_size=block_host_size,registry_pvsize=registry_pvsize,logging_pvsize=logging_pvsize,replica_log=replica_log)
 		#Print the output
 		print(output)
 
 
 		with open("applog.txt", "wb") as fh:
     			fh.write(output)		
-				
- 
- 
 
 elif choice == 3:
         print (60 * '-')
@@ -404,9 +412,15 @@ elif choice == 3:
 		env = Environment(loader=file_loader)
 		
 		#load the appropriate template
-		template = env.get_template('./templates/39/appmet-multi.j2')
+		#template = env.get_template('./templates/39/appmet-multi.j2')
 
-		output = template.render(ver=ver,app_hosts=app_hosts,raw_devices=raw_devices, raw_storage_size=raw_storage_size, block_host_size=block_host_size,registry_pvsize=registry_pvsize,metrics_pvsize=metrics_pvsize,met_hosts=met_hosts,met_devices=met_devices, met_storage_size=met_storage_size )
+                if ver == '3.9':
+                        template = env.get_template('./templates/39/appmet-multi.j2')
+                elif ver == '3.10':
+                        template = env.get_template('./templates/310/appmet-multi.j2')
+  
+
+		output = template.render(ver=ver,app_hosts=app_hosts,raw_devices=json.dumps(raw_devices), raw_storage_size=raw_storage_size, block_host_size=block_host_size,registry_pvsize=registry_pvsize,metrics_pvsize=metrics_pvsize,met_hosts=met_hosts,met_devices=met_devices, met_storage_size=met_storage_size )
 		#Print the output
 		print(output)
 		with open("appmet-multi.txt", "wb") as fh:
@@ -461,9 +475,13 @@ elif choice == 3:
 		env = Environment(loader=file_loader)
 		
 		#load the appropriate template
-		template = env.get_template('./templates/39/appmet.j2')
-
-		output = template.render(ver=ver,app_hosts=app_hosts,raw_devices=raw_devices, raw_storage_size=raw_storage_size, block_host_size=block_host_size,registry_pvsize=registry_pvsize, metrics_pvsize = metrics_pvsize)
+		#template = env.get_template('./templates/39/appmet.j2')
+                if ver == '3.9':
+                        template = env.get_template('./templates/39/appmet.j2')
+                elif ver == '3.10':
+                        template = env.get_template('./templates/310/appmet.j2')
+  
+		output = template.render(ver=ver,app_hosts=app_hosts,raw_devices=json.dumps(raw_devices), raw_storage_size=raw_storage_size, block_host_size=block_host_size,registry_pvsize=registry_pvsize, metrics_pvsize = metrics_pvsize)
 		#Print the output
 		print(output)
 
@@ -544,9 +562,13 @@ elif choice == 4:
 		env = Environment(loader=file_loader)
 		
 		#load the appropriate template
-		template = env.get_template('./templates/39/applogmet-multi.j2')
-
-		output = template.render(ver=ver,app_hosts=app_hosts,raw_devices=raw_devices, raw_storage_size=raw_storage_size, block_host_size=block_host_size,registry_pvsize=registry_pvsize,logging_pvsize=logging_pvsize,replica_log=replica_log, met_log_hosts=met_log_hosts, met_log_devices=met_log_devices)
+		#template = env.get_template('./templates/39/applogmet-multi.j2')
+                if ver == '3.9':
+                        template = env.get_template('./templates/39/applogmet-multi.j2')
+                elif ver == '3.10':
+                        template = env.get_template('./templates/310/applogmet-multi.j2')
+  
+		output = template.render(ver=ver,app_hosts=app_hosts,raw_devices=json.dumps(raw_devices), raw_storage_size=raw_storage_size, block_host_size=block_host_size,registry_pvsize=registry_pvsize,logging_pvsize=logging_pvsize,replica_log=replica_log, met_log_hosts=met_log_hosts, met_log_devices=met_log_devices)
 		#Print the output
 		print(output)
 
@@ -610,9 +632,14 @@ elif choice == 4:
 		env = Environment(loader=file_loader)
 		
 		#load the appropriate template
-		template = env.get_template('./templates/39/applogmet.j2')
+		#template = env.get_template('./templates/39/applogmet.j2')
+                if ver == '3.9':
+                        template = env.get_template('./templates/39/applogmet.j2')
+                elif ver == '3.10':
+                        template = env.get_template('./templates/310/applogmet.j2')
+  
 
-		output = template.render(ver=ver,app_hosts=app_hosts,raw_devices=raw_devices, raw_storage_size=raw_storage_size, block_host_size=block_host_size,registry_pvsize=registry_pvsize,logging_pvsize=logging_pvsize,replica_log=replica_log)
+		output = template.render(ver=ver,app_hosts=app_hosts,raw_devices=json.dumps(raw_devices), raw_storage_size=raw_storage_size, block_host_size=block_host_size,registry_pvsize=registry_pvsize,logging_pvsize=logging_pvsize,replica_log=replica_log)
 		#Print the output
 		print(output)
 
@@ -627,13 +654,12 @@ elif choice == 5:
         print( "With a minimum of 3 required.")  
         print (60 * '-')
         avail_hosts = int(raw_input("How many nodes are available ?:  "))
-        if avail_hosts >= 4:
+        if avail_hosts >= 3:
     
                 app_hosts =  raw_input("What hosts will be used for application storage (IP/FQDN) ?: ").strip().split(" ")
                 min_hosts()
                 host_not_valid()
                 raw_devices = raw_input("What are the raw storage devices these hosts(/dev/<device>) ?: ").strip().split(" ")
-                raw_devices = json.dumps(raw_devices)
                 raw_storage_size = int(raw_input("What is the size of each raw storage device(s) ?: "))
  
  
@@ -649,50 +675,21 @@ elif choice == 5:
 		env = Environment(loader=file_loader)
 		
 		#load the appropriate template
-		template = env.get_template('./templates/39/app.j2')
-
-		output = template.render(ver=ver,app_hosts=app_hosts,raw_devices=raw_devices, raw_storage_size=raw_storage_size)
+		#template = env.get_template('./templates/310/app.j2')
+                if ver == '3.9':
+                        template = env.get_template('./templates/39/app.j2')
+                elif ver == '3.10':
+                        template = env.get_template('./templates/310/app.j2')
+                        
+		output = template.render(ver=ver,app_hosts=app_hosts,raw_devices=json.dumps(raw_devices), raw_storage_size=raw_storage_size)
 		#Print the output
 		print(output)
 
 
 		with open("app.txt", "wb") as fh:
     			fh.write(output)
-
-  
-
-
-        else:
-                app_hosts =  raw_input("What hosts will be used for application storage (IP/FQDN) ?:  ").strip().split(" ")
-                min_hosts()
-                host_not_valid() 
-                raw_devices = raw_input("What are the raw storage devices for these hosts(/dev/<device>) ?: ").strip().split(" ")
-                raw_devices = json.dumps(raw_devices)
-                raw_storage_size = int(raw_input("What is the size of each raw storage device (GB) ?: "))
-
-
-                cluster_storage = len(raw_devices) * raw_storage_size * len(app_hosts)
-                total_avail_store = cluster_storage / 3.0
-
-                print "# Cluster 1"
-                print "# Total Storage allocated (GB) = 0" 
-                print "# Total Storage available (GB) = %d" % total_avail_store 
-
-                
-                file_loader = FileSystemLoader('.')
-		# Load the enviroment
-		env = Environment(loader=file_loader)
-		
-		#load the appropriate template
-		template = env.get_template('./templates/39/app.j2')
-
-		output = template.render(ver=ver,app_hosts=app_hosts,raw_devices=raw_devices, raw_storage_size=raw_storage_size)
-		#Print the output
-		print(output)
-		with open("app.txt", "wb") as fh:
-    			fh.write(output)
-            
-              
+               
+          
     
 else:
         print ("Invalid number. Try again...")
